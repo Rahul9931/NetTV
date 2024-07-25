@@ -1,14 +1,14 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"
-import { AntDesign } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 
 const Header = ()=>{
-    const navigation = useNavigation()
+    const navigation = useNavigation();
     return(
         <View style={styles.headerStyle}>
             <Text style={styles.textStyle}>NetTV</Text>
-            <TouchableOpacity onPress={navigation.navigate('Search')}>
-                <AntDesign name="search1" size={24} color="white" style={{marginTop:5}}/>
+            <TouchableOpacity onPress={() => navigation.navigate('Search')}>
+            <FontAwesome5 name="search" size={24} color="white" />
             </TouchableOpacity>
         </View>
     )

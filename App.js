@@ -10,6 +10,7 @@ import Entypo from '@expo/vector-icons/Entypo';
 import Color from './src/shared/Color';
 import { Text } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
+import { StatusBar } from 'react-native';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -18,6 +19,7 @@ const HomeStack = () => (
   <Stack.Navigator>
     <Stack.Screen name="Home" component={HomeScreen} options={{headerShown:false}}/>
     <Stack.Screen name="Details" component={DetailsScreen} options={{headerShown:false}}/>
+    <Stack.Screen name="Search" component={SearchScreen} options={{headerShown:false}}/>
   </Stack.Navigator>
 );
 
@@ -31,6 +33,10 @@ const SearchStack = () => (
 export default function App() {
   return (
     <NavigationContainer>
+      <StatusBar
+        barStyle={'light-content'}
+        backgroundColor="#000"
+      />
       <Stack.Navigator >
         <Stack.Screen name="Splash" component={SplashScreen} options={{headerShown:false}}/>
         <Stack.Screen name="Main" component={MainTabNavigator} options={{headerShown:false}}/>
@@ -43,20 +49,26 @@ const MainTabNavigator = () => (
   <Tab.Navigator 
     screenOptions={({route})=>({
       headerShown:false,
+      tabBarIcon: ({ focused, color, size }) => {
+        let iconName;
+
+        if (route.name === 'HomeStack') {
+          iconName = focused ? 'home' : 'home';
+        } else if (route.name === 'SearchStack') {
+          iconName = focused ? 'search' : 'search';
+        }
+
+        return <FontAwesome5 name={iconName} size={24} color={color} />;
+      },
       tabBarActiveTintColor:'red',
       tabBarInactiveTintColor:'white',
+      tabBarShowLabel:false,
       tabBarStyle:{
         backgroundColor:Color.primary,
-      }
+      },
     })}
   >
-    <Tab.Screen name="Home" component={HomeStack} options={()=>({
-      tabBarIcon:()=><Entypo name="home" size={24} color="white" />,
-      tabBarLabel:()=><Text></Text>
-    })}/>
-    <Tab.Screen name="Search" component={SearchStack} options={()=>({
-      tabBarIcon:()=><FontAwesome5 name="search" size={24} color="white" />,
-      tabBarLabel:()=><Text></Text>
-    })}/>
+    <Tab.Screen name="HomeStack" component={HomeStack}/>
+    <Tab.Screen name="SearchStack" component={SearchStack} />
   </Tab.Navigator>
 );

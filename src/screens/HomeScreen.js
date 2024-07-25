@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native"
+import { StatusBar, StyleSheet, Text, View } from "react-native"
 import Color from "../shared/Color"
 import Header from "../components/Header"
 import { useEffect, useState } from "react"
@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         padding:10,
-        marginTop:20,
         backgroundColor:Color.primary
     }
 })
